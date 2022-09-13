@@ -10,7 +10,7 @@ import * as auth from './routes/auth.js';
 import { checkAuth }  from './utils/checkAuth.js';
 
 mongoose
-  .connect('mongodb+srv://admin:admin@cluster0.sfmtey9.mongodb.net/library?retryWrites=true&w=majority')
+  .connect(process.env.MONGODB_URI)
   .then(() => console.log('DB ok'))
   .catch((e)=> console.log('db error', e))
 
@@ -35,7 +35,7 @@ app.get('/book/:id', checkAuth, books.getSingle)
 app.patch('/books/:id', booksValidation, checkAuth, books.update)
 app.delete('/books/:id', checkAuth, books.remove);
 
-app.listen(4444, (err) => {
+app.listen(process.env.PORT || 4444, (err) => {
   if (err) {
     return console.log(err)
   }
