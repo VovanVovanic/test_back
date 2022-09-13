@@ -35,7 +35,9 @@ app.get('/book/:id', checkAuth, books.getSingle)
 app.patch('/books/:id', booksValidation, checkAuth, books.update)
 app.delete('/books/:id', checkAuth, books.remove);
 
-app.listen(Process.env.PORT || 4444, (err) => {
+
+const port = process.env.PORT || 4444
+app.listen(port, (err) => {
   if (err) {
     return console.log(err)
   }
